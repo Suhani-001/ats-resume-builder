@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ATS-Friendly Resume Builder — Build professional resumes instantly with live preview, ATS scoring, and PDF export. Free for students and freshers.">
+  <meta name="keywords" content="resume builder, ATS resume, free resume, student resume, freshers resume, CV builder">
+  <meta name="author" content="Suhani Jain">
+  <meta property="og:title" content="ATS Resume Builder — Land Your Dream Job">
+  <meta property="og:description" content="Build ATS-optimized resumes with real-time preview and quality scoring.">
+  <title>ATS Resume Builder — Land Your Dream Job</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════════════════
+       LOADING SCREEN
+  ══════════════════════════════════════════════════════════ -->
+  <div id="loading-screen">
+    <div class="loader-logo">✦ ResumeAI</div>
+    <p style="color:rgba(255,255,255,.5);font-size:.875rem;">Building your professional toolkit…</p>
+    <div class="loader-bar">
+      <div class="loader-bar-fill"></div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       TOP NAVIGATION
+  ══════════════════════════════════════════════════════════ -->
+  <nav id="top-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-brand">
+      <div class="nav-brand-icon" aria-hidden="true">✦</div>
+      <span class="nav-brand-text">ResumeAI</span>
+    </div>
+
+    <div class="nav-actions">
+      <button id="load-sample" class="btn btn-secondary btn-sm" title="Load sample resume data">
+        <span>📋</span> <span class="btn-label">Sample Data</span>
+      </button>
+      <button id="clear-data" class="btn btn-secondary btn-sm" title="Clear all data">
+        <span>🗑️</span> <span class="btn-label">Clear All</span>
+      </button>
+      <button id="download-pdf" class="btn btn-primary btn-sm shine" title="Download resume as PDF (Ctrl+P)">
+        <span>⬇️</span> <span class="btn-label">Export PDF</span>
+      </button>
+      <button id="theme-toggle" class="theme-toggle" title="Toggle dark/light mode" aria-label="Toggle theme"></button>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MAIN APPLICATION
+  ══════════════════════════════════════════════════════════ -->
+  <main id="app" role="main">
+
+    <!-- ── EDITOR PANEL (LEFT SIDEBAR) ────────────────────── -->
+    <aside id="editor-panel" aria-label="Resume editor">
+
+      <!-- Section Navigation Tabs -->
+      <nav class="section-tabs" role="tablist" aria-label="Resume sections">
+        <button class="tab-btn active" data-tab="personal" role="tab" aria-selected="true" title="Personal Information">
+          👤 Personal
+        </button>
+        <button class="tab-btn" data-tab="education" role="tab" aria-selected="false" title="Education">
+          🎓 Education
+        </button>
+        <button class="tab-btn" data-tab="skills" role="tab" aria-selected="false" title="Skills">
+          ⚡ Skills
+        </button>
+        <button class="tab-btn" data-tab="projects" role="tab" aria-selected="false" title="Projects">
+          🚀 Projects
+        </button>
+        <button class="tab-btn" data-tab="experience" role="tab" aria-selected="false" title="Experience">
+          💼 Experience
+        </button>
+        <button class="tab-btn" data-tab="extras" role="tab" aria-selected="false" title="Certifications & Achievements">
+          🏆 Extras
+        </button>
+        <button class="tab-btn" data-tab="settings" role="tab" aria-selected="false" title="Templates & Settings">
+          ⚙️ Settings
+        </button>
+      </nav>
+
+      <!-- ──────────────────────────────────────────────────
+           TAB: PERSONAL INFORMATION
+      ────────────────────────────────────────────────── -->
+      <section id="tab-personal" class="editor-content active" role="tabpanel">
+        <div class="section-header">
+          <div class="section-title">
+            <div class="section-title-icon" aria-hidden="true">👤</div>
+            Personal Information
+          </div>
+        </div>
+
+        <div class="info-card">
+          <span class="info-card-icon">💡</span>
+          <span>Fill in all fields for the best ATS score. Fields marked with * are most important.</span>
+        </div>
+
+        <div class="form-group">
+          <label for="pi-fullName" class="label-required">Full Name</label>
+          <input type="text" id="pi-fullName" placeholder="e.g. Aanya Sharma" autocomplete="name" maxlength="80">
+        </div>
+
+        <div class="form-group">
+          <label for="pi-title" class="label-required">Professional Title</label>
+          <input type="text" id="pi-title" placeholder="e.g. Full Stack Developer | ML Enthusiast" maxlength="100">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pi-email" class="label-required">Email Address</label>
+            <input type="email" id="pi-email" placeholder="you@email.com" autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="pi-phone">Phone Number</label>
+            <input type="tel" id="pi-phone" placeholder="+91 98765 43210" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pi-location">Location</label>
+          <input type="text" id="pi-location" placeholder="Bengaluru, Karnataka, India">
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="section-title" style="font-size:.875rem;margin-bottom:12px;">
+          <div class="section-title-icon" style="width:26px;height:26px;font-size:.75rem;" aria-hidden="true">🔗</div>
+          Online Profiles
+        </div>
+
+        <div class="form-group">
+          <label for="pi-linkedin">LinkedIn URL</label>
+          <input type="url" id="pi-linkedin" placeholder="https://linkedin.com/in/yourname">
+        </div>
+
+        <div class="form-group">
+          <label for="pi-github">GitHub URL</label>
+          <input type="url" id="pi-github" placeholder="https://github.com/yourusername">
+        </div>
+
+        <div class="form-group">
+          <label for="pi-portfolio">Portfolio / Website</label>
+          <input type="url" id="pi-portfolio" placeholder="https://yourportfolio.dev">
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="form-group">
+          <label for="pi-summary" class="label-required">Professional Summary</label>
+          <textarea id="pi-summary" rows="6" maxlength="600" data-maxchars="600"
+            placeholder="Write a compelling 3-4 sentence summary highlighting your expertise, key achievements, and career goals. Include relevant keywords for ATS systems. Example: 'Passionate Full Stack Developer with 2+ years of experience building scalable web applications using React and Node.js...'"></textarea>
+          <div class="char-count" id="summary-char-count">0 / 600</div>
+          <p class="help-text">💡 Aim for 150-300 words. Include technical keywords from job descriptions.</p>
+        </div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────
+           TAB: EDUCATION
+      ────────────────────────────────────────────────── -->
+      <section id="tab-education" class="editor-content" role="tabpanel">
+        <div class="section-header">
+          <div class="section-title">
+            <div class="section-title-icon" aria-hidden="true">🎓</div>
+            Education
+          </div>
+          <button id="add-education" class="btn btn-primary btn-sm">
+            + Add
+          </button>
+        </div>
+
+        <p class="text-muted mb-2">Add your degrees, diplomas, and certifications in reverse chronological order.</p>
+
+        <div id="education-list" role="list" aria-label="Education entries"></div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────
+           TAB: SKILLS
+      ────────────────────────────────────────────────── -->
+      <section id="tab-skills" class="editor-content" role="tabpanel">
+        <div class="section-header">
+          <div class="section-title">
+            <div class="section-title-icon" aria-hidden="true">⚡</div>
+            Skills
+          </div>
+        </div>
+
+        <div class="info-card">
+          <span class="info-card-icon">💡</span>
+          <span>Type a skill and press <strong>Enter</strong> or <strong>,</strong> to add it as a tag. Press Backspace to remove the last tag.</span>
+        </div>
+
+        <!-- Technical Skills -->
+        <div class="form-group">
+          <label>Technical Skills</label>
+          <div class="skills-tags" id="skills-tags-technical" role="group" aria-label="Technical skills">
+            <input type="text" id="skills-input-technical" placeholder="e.g. Data Structures, Algorithms…" aria-label="Add technical skill">
+          </div>
+        </div>
+
+        <!-- Programming Languages -->
+        <div class="form-group">
+          <label>Programming Languages</label>
+          <div class="skills-tags" id="skills-tags-languages" role="group" aria-label="Programming languages">
+            <input type="text" id="skills-input-languages" placeholder="e.g. Python, JavaScript, Java…" aria-label="Add programming language">
+          </div>
+        </div>
+
+        <!-- Frameworks & Libraries -->
+        <div class="form-group">
+          <label>Frameworks & Libraries</label>
+          <div class="skills-tags" id="skills-tags-frameworks" role="group" aria-label="Frameworks and libraries">
+            <input type="text" id="skills-input-frameworks" placeholder="e.g. React, Node.js, FastAPI…" aria-label="Add framework">
+          </div>
+        </div>
+
+        <!-- Tools & Technologies -->
+        <div class="form-group">
+          <label>Tools & Technologies</label>
+          <div class="skills-tags" id="skills-tags-tools" role="group" aria-label="Tools and technologies">
+            <input type="text" id="skills-input-tools" placeholder="e.g. Git, Docker, AWS, Figma…" aria-label="Add tool">
+          </div>
+        </div>
+
+        <!-- Soft Skills -->
+        <div class="form-group">
+          <label>Soft Skills</label>
+          <div class="skills-tags" id="skills-tags-soft" role="group" aria-label="Soft skills">
+            <input type="text" id="skills-input-soft" placeholder="e.g. Leadership, Communication…" aria-label="Add soft skill">
+          </div>
+        </div>
+
+        <p class="help-text" style="margin-top:8px;">💡 Aim for 10+ total skills. Match keywords from job descriptions for better ATS performance.</p>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────
+           TAB: PROJECTS
+      ────────────────────────────────────────────────── -->
+      <section id="tab-projects" class="editor-content" role="tabpanel">
+        <div class="section-header">
+          <div class="section-title">
+            <div class="section-title-icon" aria-hidden="true">🚀</div>
+            Projects
+          </div>
+          <button id="add-project" class="btn btn-primary btn-sm">
+            + Add
+          </button>
+        </div>
+
+        <p class="text-muted mb-2">Showcase your best projects. Include GitHub links and live demos for maximum impact.</p>
+
+        <div id="project-list" role="list" aria-label="Project entries"></div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────
+           TAB: EXPERIENCE
+      ────────────────────────────────────────────────── -->
+      <section id="tab-experience" class="editor-content" role="tabpanel">
+        <div class="section-header">
+          <div class="section-title">
+            <div class="section-title-icon" aria-hidden="true">💼</div>
+            Experience
+          </div>
+          <button id="add-experience" class="btn btn-primary btn-sm">
+            + Add
+          </button>
+        </div>
+
+        <p class="text-muted mb-2">Add internships, part-time jobs, freelance work, or research positions.</p>
+
+        <div id="experience-list" role="list" aria-label="Experience entries"></div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────
+           TAB: EXTRAS (Certifications + Achievements)
+      ────────────────────────────────────────────────── -->
+      <section id="tab-extras" class="editor-content" role="tabpanel">
+
+        <!-- Certifications -->
+        <div class="section-header">
+          <div class="section-title">
+            <div class="section-title-icon" aria-hidden="true">📜</div>
+            Certifications
+          </div>
+          <button id="add-certification" class="btn btn-primary btn-sm">
+            + Add
+          </button>
+        </div>
+
+        <p class="text-muted mb-2">Add relevant certifications from AWS, Google, Coursera, Udemy, etc.</p>
+        <div id="certification-list" role="list" aria-label="Certification entries"></div>
+
+        <div class="divider" style="margin:24px 0;"></div>
+
+        <!-- Achievements -->
+        <div class="section-header">
+          <div class="section-title">
+            <div class="section-title-icon" aria-hidden="true">⭐</div>
+            Achievements
+          </div>
+          <button id="add-achievement" class="btn btn-primary btn-sm">
+            + Add
+          </button>
+        </div>
+
+        <p class="text-muted mb-2">Awards, hackathon wins, scholarship, leadership roles, competitions.</p>
+        <div id="achievement-list" role="list" aria-label="Achievement entries"></div>
+      </section>
+
+      <!-- ──────────────────────────────────────────────────
+           TAB: SETTINGS (Templates)
+      ────────────────────────────────────────────────── -->
+      <section id="tab-settings" class="editor-content" role="tabpanel">
+
+        <!-- Template Picker -->
+        <div class="section-header">
+          <div class="section-title">
+            <div class="section-title-icon" aria-hidden="true">🎨</div>
+            Resume Templates
+          </div>
+        </div>
+
+        <div class="template-grid" role="radiogroup" aria-label="Select resume template">
+
+          <!-- Template 1 -->
+          <div class="template-card active" data-tpl="1" role="radio" aria-checked="true" tabindex="0" aria-label="Template 1: Modern Professional">
+            <div class="template-preview">
+              <div class="tpl-line accent" style="height:12px;background:linear-gradient(90deg,#1e1b4b,#4f46e5);border-radius:2px;"></div>
+              <div class="tpl-line dark" style="width:70%;height:4px;margin-top:4px;"></div>
+              <div class="tpl-line" style="width:50%;"></div>
+              <div style="display:grid;grid-template-columns:1fr 2fr;gap:3px;margin-top:4px;flex:1;">
+                <div style="background:#f8fafc;border-radius:2px;padding:3px;">
+                  <div class="tpl-line accent shorter"></div>
+                  <div class="tpl-line"></div><div class="tpl-line"></div><div class="tpl-line short"></div>
+                </div>
+                <div style="padding:3px;">
+                  <div class="tpl-line accent shorter"></div>
+                  <div class="tpl-line"></div><div class="tpl-line short"></div><div class="tpl-line"></div>
+                </div>
+              </div>
+            </div>
+            <div class="template-name">Modern Pro</div>
+            <div class="template-tag">Two-Column</div>
+          </div>
+
+          <!-- Template 2 -->
+          <div class="template-card" data-tpl="2" role="radio" aria-checked="false" tabindex="0" aria-label="Template 2: Minimal ATS-Friendly">
+            <div class="template-preview">
+              <div class="tpl-line dark" style="width:65%;height:5px;"></div>
+              <div class="tpl-line" style="width:45%;"></div>
+              <div class="tpl-line" style="width:80%;"></div>
+              <div class="tpl-line dark" style="height:2px;margin-top:3px;"></div>
+              <div class="tpl-line shorter" style="margin-top:4px;"></div>
+              <div class="tpl-line"></div><div class="tpl-line short"></div>
+              <div class="tpl-line dark" style="height:2px;margin-top:3px;"></div>
+              <div class="tpl-line shorter" style="margin-top:4px;"></div>
+              <div class="tpl-line"></div><div class="tpl-line"></div>
+            </div>
+            <div class="template-name">Minimal ATS</div>
+            <div class="template-tag">Single-Column</div>
+          </div>
+
+          <!-- Template 3 -->
+          <div class="template-card" data-tpl="3" role="radio" aria-checked="false" tabindex="0" aria-label="Template 3: Modern Student Portfolio">
+            <div class="template-preview">
+              <div style="display:grid;grid-template-columns:5px 1fr;flex-shrink:0;">
+                <div style="background:linear-gradient(180deg,#6366f1,#0ea5e9);border-radius:1px;"></div>
+                <div style="padding:4px;">
+                  <div class="tpl-line" style="width:65%;height:4px;background:linear-gradient(90deg,#4f46e5,#0ea5e9);"></div>
+                  <div class="tpl-line shorter"></div>
+                  <div class="tpl-line" style="width:75%;"></div>
+                </div>
+              </div>
+              <div style="padding:4px 4px 0 9px;">
+                <div style="display:flex;align-items:center;gap:3px;margin:3px 0;">
+                  <div class="tpl-line" style="width:30%;height:2px;background:#6366f1;"></div>
+                  <div class="tpl-line" style="flex:1;height:1px;"></div>
+                </div>
+                <div class="tpl-line"></div><div class="tpl-line short"></div>
+                <div style="display:flex;align-items:center;gap:3px;margin:3px 0;">
+                  <div class="tpl-line" style="width:30%;height:2px;background:#6366f1;"></div>
+                  <div class="tpl-line" style="flex:1;height:1px;"></div>
+                </div>
+                <div class="tpl-line"></div><div class="tpl-line short"></div>
+              </div>
+            </div>
+            <div class="template-name">Student Pro</div>
+            <div class="template-tag">Modern</div>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Keyboard Shortcuts -->
+        <div class="section-title" style="font-size:.875rem;margin-bottom:12px;">
+          <div class="section-title-icon" style="width:26px;height:26px;font-size:.75rem;" aria-hidden="true">⌨️</div>
+          Keyboard Shortcuts
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;color:var(--text-secondary);">
+            <span>Save resume</span>
+            <kbd style="background:var(--bg-elevated);border:1px solid var(--border);padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.75rem;">Ctrl+S</kbd>
+          </div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;color:var(--text-secondary);">
+            <span>Export PDF</span>
+            <kbd style="background:var(--bg-elevated);border:1px solid var(--border);padding:2px 8px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:.75rem;">Ctrl+P</kbd>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Actions -->
+        <div class="section-title" style="font-size:.875rem;margin-bottom:12px;">
+          <div class="section-title-icon" style="width:26px;height:26px;font-size:.75rem;" aria-hidden="true">⚙️</div>
+          Actions
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <button id="download-pdf-2" class="btn btn-primary w-full">
+            ⬇️ Export as PDF
+          </button>
+          <button id="load-sample-settings" class="btn btn-secondary w-full">
+            📋 Load Sample Data
+          </button>
+          <button id="clear-data-settings" class="btn btn-secondary w-full" style="color:var(--danger);border-color:rgba(239,68,68,.3);">
+            🗑️ Clear All Data
+          </button>
+        </div>
+
+        <div class="divider"></div>
+
+        <p style="font-size:.75rem;color:var(--text-muted);text-align:center;line-height:1.6;">
+          ✨ All data is saved automatically in your browser.<br>
+          No servers. No accounts. No data collected.
+        </p>
+      </section>
+
+    </aside><!-- /editor-panel -->
+
+    <!-- ── RIGHT PANEL (Preview + ATS Score) ──────────────── -->
+    <div id="preview-panel">
+
+      <!-- Panel Tabs: Preview | Score -->
+      <div class="panel-tabs" role="tablist">
+        <button class="panel-tab active" data-panel="preview" role="tab" aria-selected="true">
+          👁 Live Preview
+        </button>
+        <button class="panel-tab" data-panel="score" role="tab" aria-selected="false">
+          📊 ATS Score
+        </button>
+        <button class="panel-tab" data-panel="checklist" role="tab" aria-selected="false">
+          ✅ Checklist
+        </button>
+      </div>
+
+      <!-- ── PANEL: LIVE PREVIEW ────────────────────────── -->
+      <div id="panel-preview" class="panel-view active">
+        <!-- Preview Toolbar -->
+        <div class="preview-toolbar">
+          <div class="preview-toolbar-left">
+            <span class="preview-label">📄 A4 Preview</span>
+            <div class="zoom-controls">
+              <button id="zoom-out" class="btn btn-ghost btn-icon btn-sm" title="Zoom out">－</button>
+              <span id="zoom-value" class="zoom-value">70%</span>
+              <button id="zoom-in" class="btn btn-ghost btn-icon btn-sm" title="Zoom in">＋</button>
+              <button id="zoom-fit" class="btn btn-ghost btn-sm" title="Fit to screen">⊡ Fit</button>
+            </div>
+          </div>
+          <button id="download-pdf-toolbar" class="btn btn-primary btn-sm">
+            ⬇️ Export PDF
+          </button>
+        </div>
+
+        <!-- Resume Viewport -->
+        <div id="preview-viewport">
+          <!-- A4 Resume Sheet — content injected by JS -->
+          <article id="resume-sheet" class="tpl-1" aria-label="Resume preview">
+            <!-- Dynamic content rendered by renderPreview() -->
+          </article>
+        </div>
+      </div><!-- /panel-preview -->
+
+      <!-- ── PANEL: ATS SCORE ───────────────────────────── -->
+      <div id="panel-score" class="panel-view">
+        <div class="score-tab-content">
+
+          <!-- Score Ring -->
+          <div class="ats-panel">
+            <div class="score-ring-container">
+              <div class="score-ring" aria-label="ATS Resume Score">
+                <svg viewBox="0 0 140 140" width="140" height="140">
+                  <defs>
+                    <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" style="stop-color:#6366f1"/>
+                      <stop offset="100%" style="stop-color:#0ea5e9"/>
+                    </linearGradient>
+                  </defs>
+                  <circle class="score-ring-bg" cx="70" cy="70" r="59"/>
+                  <circle class="score-ring-fill" id="score-ring-fill" cx="70" cy="70" r="59"/>
+                </svg>
+                <div class="score-ring-text">
+                  <div class="score-value" id="ats-score-value" aria-live="polite">0</div>
+                  <div class="score-label">/ 100</div>
+                </div>
+              </div>
+              <div class="score-title">
+                <span id="score-badge" class="badge badge-danger">Weak</span>
+              </div>
+              <p class="score-subtitle" id="score-status-text">Start filling in your resume details below.</p>
+            </div>
+
+            <!-- Score Breakdown -->
+            <div class="score-breakdown">
+              <div style="font-size:.78rem;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">Score Breakdown</div>
+              <!-- Breakdown items generated dynamically, but we pre-define the structure -->
+              <div class="score-item">
+                <span class="score-item-name">Contact Info</span>
+                <div class="score-item-bar"><div class="score-item-fill" id="score-bar-contact" style="width:0%"></div></div>
+                <span class="score-item-pts" id="score-pts-contact">0/15</span>
+              </div>
+              <div class="score-item">
+                <span class="score-item-name">Summary</span>
+                <div class="score-item-bar"><div class="score-item-fill" id="score-bar-summary" style="width:0%"></div></div>
+                <span class="score-item-pts" id="score-pts-summary">0/10</span>
+              </div>
+              <div class="score-item">
+                <span class="score-item-name">Education</span>
+                <div class="score-item-bar"><div class="score-item-fill" id="score-bar-education" style="width:0%"></div></div>
+                <span class="score-item-pts" id="score-pts-education">0/12</span>
+              </div>
+              <div class="score-item">
+                <span class="score-item-name">Skills</span>
+                <div class="score-item-bar"><div class="score-item-fill" id="score-bar-skills" style="width:0%"></div></div>
+                <span class="score-item-pts" id="score-pts-skills">0/15</span>
+              </div>
+              <div class="score-item">
+                <span class="score-item-name">Projects</span>
+                <div class="score-item-bar"><div class="score-item-fill" id="score-bar-projects" style="width:0%"></div></div>
+                <span class="score-item-pts" id="score-pts-projects">0/15</span>
+              </div>
+              <div class="score-item">
+                <span class="score-item-name">Experience</span>
+                <div class="score-item-bar"><div class="score-item-fill" id="score-bar-experience" style="width:0%"></div></div>
+                <span class="score-item-pts" id="score-pts-experience">0/13</span>
+              </div>
+              <div class="score-item">
+                <span class="score-item-name">Certifications</span>
+                <div class="score-item-bar"><div class="score-item-fill" id="score-bar-certifications" style="width:0%"></div></div>
+                <span class="score-item-pts" id="score-pts-certifications">0/8</span>
+              </div>
+              <div class="score-item">
+                <span class="score-item-name">LinkedIn</span>
+                <div class="score-item-bar"><div class="score-item-fill" id="score-bar-linkedin" style="width:0%"></div></div>
+                <span class="score-item-pts" id="score-pts-linkedin">0/6</span>
+              </div>
+              <div class="score-item">
+                <span class="score-item-name">GitHub</span>
+                <div class="score-item-bar"><div class="score-item-fill" id="score-bar-github" style="width:0%"></div></div>
+                <span class="score-item-pts" id="score-pts-github">0/6</span>
+              </div>
+            </div>
+
+            <!-- Suggestions -->
+            <div class="suggestions-list">
+              <div style="font-size:.78rem;font-weight:700;color:var(--text-muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px;">💡 Smart Suggestions</div>
+              <div id="suggestions-list">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /panel-score -->
+
+      <!-- ── PANEL: CHECKLIST ───────────────────────────── -->
+      <div id="panel-checklist" class="panel-view">
+        <div class="score-tab-content">
+
+          <div class="checklist-widget">
+            <div class="widget-header">
+              ✅ Resume Completion Checklist
+            </div>
+            <div class="widget-body">
+              <div class="progress-bar-container">
+                <div class="progress-bar-label">
+                  <span>Progress</span>
+                  <span id="checklist-progress-label">0/8 Complete</span>
+                </div>
+                <div class="progress-bar">
+                  <div class="progress-bar-fill" id="checklist-progress-fill" style="width:0%"></div>
+                </div>
+              </div>
+              <ul class="checklist" id="completion-checklist" aria-label="Resume completion checklist">
+                <!-- Populated by JS -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- ATS Tips Card -->
+          <div class="checklist-widget">
+            <div class="widget-header">
+              🎯 ATS Optimization Tips
+            </div>
+            <div class="widget-body">
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div class="suggestion-item warn">
+                  <span class="suggestion-icon">🔑</span>
+                  <span class="suggestion-text"><strong>Use keywords</strong> from the job description naturally in your summary and skills.</span>
+                </div>
+                <div class="suggestion-item warn">
+                  <span class="suggestion-icon">📊</span>
+                  <span class="suggestion-text"><strong>Quantify results:</strong> "Increased performance by 40%" beats "Improved performance".</span>
+                </div>
+                <div class="suggestion-item warn">
+                  <span class="suggestion-icon">📁</span>
+                  <span class="suggestion-text"><strong>Use standard headings:</strong> "Experience", "Education", "Skills" are ATS-friendly.</span>
+                </div>
+                <div class="suggestion-item warn">
+                  <span class="suggestion-icon">📏</span>
+                  <span class="suggestion-text"><strong>Keep it to 1 page</strong> if you have less than 3 years of experience.</span>
+                </div>
+                <div class="suggestion-item warn">
+                  <span class="suggestion-icon">🔗</span>
+                  <span class="suggestion-text"><strong>Always include</strong> your GitHub and LinkedIn — tech recruiters always check.</span>
+                </div>
+                <div class="suggestion-item good">
+                  <span class="suggestion-icon">✅</span>
+                  <span class="suggestion-text"><strong>Use action verbs:</strong> Built, Developed, Led, Designed, Optimized, Deployed.</span>
+                </div>
+                <div class="suggestion-item good">
+                  <span class="suggestion-icon">✅</span>
+                  <span class="suggestion-text"><strong>Tailor your resume</strong> for each job application for best results.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div><!-- /panel-checklist -->
+
+    </div><!-- /preview-panel -->
+
+  </main><!-- /app -->
+
+  <!-- ══════════════════════════════════════════════════════════
+       TOAST NOTIFICATION CONTAINER
+  ══════════════════════════════════════════════════════════ -->
+  <div id="toast-container" aria-live="polite" aria-atomic="false"></div>
+
+  <!-- ══════════════════════════════════════════════════════════
+       CLEAR DATA MODAL
+  ══════════════════════════════════════════════════════════ -->
+  <div id="clear-modal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="clear-modal-title">
+    <div class="modal-box">
+      <div class="modal-title" id="clear-modal-title">⚠️ Clear All Resume Data</div>
+      <p class="modal-desc">This will permanently delete all your resume data including personal info, education, skills, projects, and experience. This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button id="clear-cancel" class="btn btn-secondary">Cancel</button>
+        <button id="clear-confirm" class="btn btn-danger">Yes, Clear All</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SITE FOOTER
+  ══════════════════════════════════════════════════════════ -->
+  <footer id="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="footer-inner">
+
+      <!-- Left: Author credit -->
+      <div class="footer-author">
+        <span class="footer-name">Suhani Jain</span>
+        <a href="mailto:sgosuhani@gmail.com" class="footer-email" aria-label="Email Suhani Jain">
+          sgosuhani@gmail.com
+        </a>
+      </div>
+
+      <!-- Centre: Brand -->
+      <div class="footer-brand" aria-hidden="true">
+        <span class="footer-brand-icon">✦</span>
+        <span>ResumeAI</span>
+      </div>
+
+      <!-- Right: Digital Heroes button + privacy note -->
+      <div class="footer-right">
+        <a
+          href="https://digitalheroesco.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-digital-heroes"
+          aria-label="Visit Digital Heroes Co website"
+        >
+          🦸 Built for Digital Heroes
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

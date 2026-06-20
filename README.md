@@ -5,9 +5,9 @@
 
 **Built for Digital Heroes**
 
-🔗 Live Demo: [Your Vercel URL]
+🌐 Live Demo: [ResumeAI Live](https://ats-resume-builder-ashy.vercel.app/)
 
-🔗 GitHub Repository: [Your GitHub Repository URL]
+📂 GitHub Repository: [Source Code](https://github.com/Suhani-001/ats-resume-builder)
 
 A fully client-side, privacy-first ATS-Friendly Resume Builder designed for students and freshers. Create professional resumes with live preview, ATS scoring, multiple templates, auto-save functionality, and PDF export — all without creating an account or sharing personal data.
 
@@ -52,11 +52,7 @@ While applying for internships, I frequently had to update and customize my resu
 
 Simply open `index.html` in any modern browser.
 
-Or run a local server:
-
-```bash
-npx serve .
-```
+No installation or build process is required.
 
 ## Deploy to Vercel
 
@@ -79,4 +75,5 @@ ats-resume-builder/
 ## Contact
 
 **Suhani Jain**
-gmail:sgosuhani@gmail.com
+
+📧 sgosuhani@gmail.com
